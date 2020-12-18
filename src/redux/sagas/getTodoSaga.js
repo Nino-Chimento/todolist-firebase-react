@@ -12,7 +12,6 @@ const dbGetTodos = async () => {
 };
 
 export function* sagaGetTodos(action) {
-  console.log("saga");
   try {
     const response = yield call(dbGetTodos, action.payload);
     yield put({
@@ -28,7 +27,6 @@ export function* sagaGetTodos(action) {
 }
 
 function* getTodosSaga() {
-  console.log("getTodos");
   yield takeEvery(GET_TODO_REQUEST, sagaGetTodos);
 }
 

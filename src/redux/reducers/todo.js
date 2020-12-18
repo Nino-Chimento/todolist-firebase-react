@@ -1,4 +1,4 @@
-import { GET_TODO_SUCCESS, GET_TODO_FAILED, GET_TODO_REQUEST } from "../types";
+import { GET_TODO_SUCCESS, GET_TODO_FAILED } from "../types";
 
 function getTodos(state = {}, action) {
   switch (action.type) {
