@@ -3,8 +3,12 @@ import { GET_TODO_FAILED, GET_TODO_SUCCESS, GET_TODO_REQUEST } from "../types";
 import firestoreDB from "../../firebase/firestore";
 
 const dbGetTodos = async () => {
-  const result = await firestoreDB.collection("todo").get();
-  return result.json();
+  let result = [];
+  const response = await firestoreDB.collection("todo").get();
+  response.forEach((doc) => {
+    result.push({ data: doc.data(), id: doc.id });
+  });
+  return result;
 };
 
 export function* sagaGetTodos(action) {
