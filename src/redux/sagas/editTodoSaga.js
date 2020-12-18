@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { GET_TODO_REQUEST, EDIT_TODO_REQUEST } from "../types";
+import { EDIT_TODO_SUCCESS, EDIT_TODO_REQUEST } from "../types";
 import firestoreDB from "../../firebase/firestore";
 
 const dbEditTodo = async (payload) => {
@@ -11,15 +11,16 @@ const dbEditTodo = async (payload) => {
 };
 
 export function* sagaEditTodo(action) {
-  console.log("saga");
   try {
-    const response = yield call(dbEditTodo(action.payload, action.payload));
+    const response = yield call(dbEditTodo(action.payload), action.payload);
     yield put({
-      type: GET_TODO_REQUEST,
+      type: EDIT_TODO_SUCCESS,
+      payload: action.payload,
     });
   } catch (error) {
     yield put({
-      type: GET_TODO_REQUEST,
+      type: EDIT_TODO_SUCCESS,
+      payload: action.payload,
     });
   }
 }

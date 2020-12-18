@@ -1,4 +1,4 @@
-import { GET_TODO_SUCCESS, GET_TODO_FAILED } from "../types";
+import { GET_TODO_SUCCESS, GET_TODO_FAILED, EDIT_TODO_SUCCESS } from "../types";
 
 function getTodos(state = {}, action) {
   switch (action.type) {
@@ -8,6 +8,14 @@ function getTodos(state = {}, action) {
     case GET_TODO_FAILED:
       state.todo = action.payload;
       break;
+    case EDIT_TODO_SUCCESS:
+      console.log(action.payload);
+      state["todo"].forEach((element) => {
+        if (element.id === action.payload.id) {
+          element.data.todo = action.payload.modify.todo;
+        }
+        return state.todo;
+      });
     default:
       break;
   }
