@@ -20,14 +20,14 @@ function App() {
   const addNewTodo = () => {
     const nuovoTodo = { complete: false, todo: newTodo };
     dispatch({ type: "INSERT_TODO_REQUEST", payload: nuovoTodo });
-    //firestoreDB.collection("todo").add(nuovoTodo);
     setNewTodo(" ");
   };
 
   const todoModifyUpdate = (id) => {
     const modify = { complete: true, todo: todoModify };
-    firestoreDB.collection("todo").doc(id).update(modify);
-    console.log(id);
+    dispatch({ type: "EDIT_TODO_REQUEST", payload: { id, modify } });
+    setTodoModify(" ");
+    //firestoreDB.collection("todo").doc(id).update(modify);
   };
 
   return (
@@ -51,9 +51,11 @@ function App() {
                 type="text"
                 onChange={(e) => setTodoModify(e.target.value)}
               ></input>
-              <button onClick={() => todoModifyUpdate(todo.id)}>
-                Modifica
-              </button>
+              {todoModify.length > 0 && (
+                <button onClick={() => todoModifyUpdate(todo.id)}>
+                  Modifica
+                </button>
+              )}
               <button onClick={() => todoDelete(todo.id)}>Elimina</button>
             </div>
           </>
