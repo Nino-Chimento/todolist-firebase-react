@@ -1,6 +1,7 @@
 import "./App.css";
 import firestoreDB from "./firebase/firestore";
 import { useEffect, useState } from "react";
+import Users from "./components/UsersComponents";
 
 function App() {
   const [prevState, setState] = useState([]);
@@ -13,7 +14,6 @@ function App() {
     result.forEach((doc) => {
       setState((prevState) => [...prevState, { data: doc.data(), id: doc.id }]);
     });
-    console.log(prevState);
   }, []);
 
   const todoDelete = (id) => {
