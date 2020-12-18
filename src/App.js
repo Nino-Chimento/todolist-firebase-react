@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  const [newTodo, setNewTodo] = useState();
-  const [todoModify, setTodoModify] = useState();
+  const [newTodo, setNewTodo] = useState("");
+  const [todoModify, setTodoModify] = useState("");
   const todos = useSelector((state) => state.getTodos.todo);
   const dispatch = useDispatch();
 
@@ -19,7 +19,8 @@ function App() {
 
   const addNewTodo = () => {
     const nuovoTodo = { complete: false, todo: newTodo };
-    firestoreDB.collection("todo").add(nuovoTodo);
+    dispatch({ type: "INSERT_TODO_REQUEST", payload: nuovoTodo });
+    //firestoreDB.collection("todo").add(nuovoTodo);
     setNewTodo(" ");
   };
 
